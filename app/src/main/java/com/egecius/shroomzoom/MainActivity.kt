@@ -1,10 +1,7 @@
 package com.egecius.shroomzoom
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 class MainActivity : AppCompatActivity() {
 
     private lateinit var presenter: MainActivityPresenter
+    private lateinit var pictureTakerDelegate: PhotoTakerDelegate
 
     private lateinit var photoView: ImageView
 
@@ -22,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         presenter = ViewModelProviders.of(this).get(MainActivityPresenter::class.java)
+        pictureTakerDelegate = PhotoTakerDelegate(this)
         setupButton()
         photoView = findViewById(R.id.photo)
     }
@@ -34,24 +33,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun dispatchTakePictureIntent() {
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if (takePictureIntent.resolveActivity(packageManager) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-        }
+        pictureTakerDelegate.dispatchTakePictureIntent()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-
-            if (data != null && data.extras != null) {
-                @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-                val imageBitmap = data.extras.get("data") as Bitmap
-
-                photoView.setImageBitmap(imageBitmap)
-            }
-        }
+        pictureTakerDelegate.onActivityResult(requestCode, resultCode, data, photoView)
     }
 
     companion object {
