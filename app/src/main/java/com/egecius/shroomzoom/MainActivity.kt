@@ -17,10 +17,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initPresenterAndDelegate()
+        setupButton()
+    }
+
+    private fun initPresenterAndDelegate() {
         pictureTakerDelegate = PhotoTakerDelegate(this)
         mPresenter = ViewModelProviders.of(this).get(MainActivityPresenter::class.java)
         mPresenter.init(pictureTakerDelegate, this)
-        setupButton()
     }
 
     private fun setupButton() {
