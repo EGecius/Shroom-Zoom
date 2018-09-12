@@ -9,21 +9,21 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var presenter: MainActivityPresenter
+    private lateinit var mViewModel: MainActivityViewModel
     private lateinit var pictureTakerDelegate: PhotoTakerDelegate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        presenter = ViewModelProviders.of(this).get(MainActivityPresenter::class.java)
+        mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         pictureTakerDelegate = PhotoTakerDelegate(this)
         setupButton()
     }
 
     private fun setupButton() {
         takePhotoButton.setOnClickListener {
-            presenter.onClickedButtonTakePhoto()
+            mViewModel.onClickedButtonTakePhoto()
             dispatchTakePictureIntent()
         }
     }
