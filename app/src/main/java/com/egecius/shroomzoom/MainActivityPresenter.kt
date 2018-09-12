@@ -2,7 +2,7 @@ package com.egecius.shroomzoom
 
 import androidx.lifecycle.ViewModel
 
-class MainActivityViewModel : ViewModel() {
+class MainActivityPresenter : ViewModel() {
 
     lateinit var pictureTakerDelegate: PhotoTakerDelegate
     lateinit var mainActivity: MainActivity
