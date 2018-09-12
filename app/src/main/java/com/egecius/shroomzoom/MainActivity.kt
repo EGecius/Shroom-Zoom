@@ -16,8 +16,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         pictureTakerDelegate = PhotoTakerDelegate(this)
+        mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        mViewModel.setPictureTaker(pictureTakerDelegate)
         setupButton()
     }
 
