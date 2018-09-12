@@ -12,7 +12,7 @@ class PhotoTakerDelegate(private val activity: AppCompatActivity) {
 
     private val photosTakenSubject: PublishSubject<Bitmap> = PublishSubject.create()
 
-    fun dispatchTakePictureIntent() {
+    fun requestTakingPicture() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (takePictureIntent.resolveActivity(activity.packageManager) != null) {
             activity.startActivityForResult(takePictureIntent, MainActivity.REQUEST_IMAGE_CAPTURE)
