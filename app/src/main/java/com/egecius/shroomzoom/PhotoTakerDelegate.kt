@@ -4,10 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.provider.MediaStore
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 
 class PhotoTakerDelegate(private val activity: AppCompatActivity) {
+
+    private val photosTakenSubject: PublishSubject<Bitmap> = PublishSubject.create()
 
     fun dispatchTakePictureIntent() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -16,7 +19,7 @@ class PhotoTakerDelegate(private val activity: AppCompatActivity) {
         }
     }
 
-    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?, photoView: ImageView) {
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         if (requestCode == MainActivity.REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
 
@@ -24,8 +27,12 @@ class PhotoTakerDelegate(private val activity: AppCompatActivity) {
                 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
                 val imageBitmap = data.extras.get("data") as Bitmap
 
-                photoView.setImageBitmap(imageBitmap)
+                photosTakenSubject.onNext(imageBitmap)
             }
         }
+    }
+
+    fun listenToPhotosTaken(): Observable<Bitmap> {
+        return photosTakenSubject
     }
 }
