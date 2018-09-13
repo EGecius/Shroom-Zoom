@@ -3,9 +3,9 @@ package com.egecius.shroomzoom
 import android.graphics.Bitmap
 import io.reactivex.Single
 
-class ShroomAnalyser {
+open class ShroomAnalyser {
 
-    fun analyse(photo: Bitmap): Single<ShroomAnalysisResult> {
+    open fun analyse(photo: Bitmap): Single<ShroomAnalysisResult> {
         // TODO: 11/09/2018 implement
         val result = ShroomAnalysisResult(listOf(
                 SingleShroomAnalysis("boletus", 0.90f),

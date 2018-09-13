@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity(), MainView {
     private fun initPresenterAndDelegate() {
         pictureTakerDelegate = PhotoTakerDelegate(this)
         mPresenter = ViewModelProviders.of(this).get(MainActivityPresenter::class.java)
-        mPresenter.init(this, pictureTakerDelegate.listenToPhotosTaken())
+        mPresenter.init(this, pictureTakerDelegate.listenToPhotosTaken(), ShroomAnalyser())
     }
 
     private fun setupButton() {

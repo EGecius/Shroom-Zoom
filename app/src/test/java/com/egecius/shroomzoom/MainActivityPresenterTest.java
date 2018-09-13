@@ -21,13 +21,15 @@ public class MainActivityPresenterTest {
     MainView mainView;
     @Mock
     Bitmap photoTakenBitmap;
+    @Mock
+    ShroomAnalyser shroomAnalyser;
 
     PublishSubject<Bitmap> publishForPhotosTaken = PublishSubject.create();
 
     @Before
     public void setUp() {
         sut = new MainActivityPresenter();
-        sut.init(mainView, publishForPhotosTaken);
+        sut.init(mainView, publishForPhotosTaken, shroomAnalyser);
     }
 
     @Test
@@ -35,6 +37,14 @@ public class MainActivityPresenterTest {
         whenPhotoTaken();
 
         verify(mainView).showPhoto(photoTakenBitmap);
+    }
+
+
+    @Test
+    public void shroomAnalyserIsCalledWhenPhotoTaken() {
+        whenPhotoTaken();
+
+        verify(shroomAnalyser).analyse(photoTakenBitmap);
     }
 
     @Test

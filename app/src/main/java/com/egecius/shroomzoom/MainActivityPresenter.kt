@@ -6,19 +6,23 @@ import io.reactivex.Observable
 
 class MainActivityPresenter : ViewModel() {
 
-    lateinit var mainView: MainView
-    lateinit var photosObservable: Observable<Bitmap>
+    private lateinit var mainView: MainView
+    private lateinit var photosObservable: Observable<Bitmap>
+    private lateinit var shroomAnalyser: ShroomAnalyser
 
-    fun init(mainView: MainView, photosObservable: Observable<Bitmap>) {
+    fun init(mainView: MainView, photosObservable: Observable<Bitmap>, shroomAnalyser: ShroomAnalyser) {
         this.mainView = mainView
         this.photosObservable = photosObservable
+        this.shroomAnalyser = shroomAnalyser
 
         listenToPhotosTaken()
     }
 
     private fun listenToPhotosTaken() {
         photosObservable
-                .subscribe { bitmap -> mainView.showPhoto(bitmap) }
+                .subscribe { bitmap ->
+                    shroomAnalyser.analyse(bitmap)
+                    mainView.showPhoto(bitmap) }
     }
 
     fun onClickedButtonTakePhoto() {
