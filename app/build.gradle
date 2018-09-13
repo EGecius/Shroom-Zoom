@@ -25,6 +25,8 @@ android {
 ext {
     rxandroidVersion = "2.0.1"
     rxJavaVersion = "2.1.0"
+    assertjVersion = "2.6.0"
+    mockitoVersion = "2.13.0"
 }
 
 dependencies {
@@ -41,4 +43,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
 
     testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    testImplementation "org.assertj:assertj-core:${assertjVersion}"
 }
