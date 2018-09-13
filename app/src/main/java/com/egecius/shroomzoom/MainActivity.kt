@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private fun initPresenterAndDelegate() {
         pictureTakerDelegate = PhotoTakerDelegate(this)
         mPresenter = ViewModelProviders.of(this).get(MainActivityPresenter::class.java)
-        mPresenter.init(pictureTakerDelegate, this)
+        mPresenter.init(this, pictureTakerDelegate.listenToPhotosTaken())
     }
 
     private fun setupButton() {
@@ -40,6 +40,10 @@ class MainActivity : AppCompatActivity() {
 
     fun showPhoto(bitmap: Bitmap) {
         photoView.setImageBitmap(bitmap)
+    }
+
+    fun takePhoto() {
+        pictureTakerDelegate.requestTakingPicture()
     }
 
     companion object {
