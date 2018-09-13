@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainView {
 
     private lateinit var mPresenter: MainActivityPresenter
     private lateinit var pictureTakerDelegate: PhotoTakerDelegate
@@ -38,11 +38,11 @@ class MainActivity : AppCompatActivity() {
         pictureTakerDelegate.onActivityResult(requestCode, resultCode, data)
     }
 
-    fun showPhoto(bitmap: Bitmap) {
+    override fun showPhoto(bitmap: Bitmap) {
         photoView.setImageBitmap(bitmap)
     }
 
-    fun takePhoto() {
+    override fun takePhoto() {
         pictureTakerDelegate.requestTakingPicture()
     }
 

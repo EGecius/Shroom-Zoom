@@ -6,10 +6,10 @@ import io.reactivex.Observable
 
 class MainActivityPresenter : ViewModel() {
 
-    lateinit var mainActivity: MainActivity
+    lateinit var mainActivity: MainView
     lateinit var photosObservable: Observable<Bitmap>
 
-    fun init(mainActivity: MainActivity, photosObservable: Observable<Bitmap>) {
+    fun init(mainActivity: MainView, photosObservable: Observable<Bitmap>) {
         this.mainActivity = mainActivity
         this.photosObservable = photosObservable
 
@@ -25,4 +25,9 @@ class MainActivityPresenter : ViewModel() {
         mainActivity.takePhoto()
     }
 
+}
+
+interface MainView {
+    fun showPhoto(bitmap: Bitmap)
+    fun takePhoto()
 }
