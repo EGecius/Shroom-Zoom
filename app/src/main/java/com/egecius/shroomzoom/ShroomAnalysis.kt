@@ -1,5 +1,9 @@
 package com.egecius.shroomzoom
 
-data class ShroomAnalysisResult (val list: List<SingleShroomAnalysis>)
+import android.graphics.Bitmap
+
+data class ShroomAnalysisResult (
+        val list: List<SingleShroomAnalysis>,
+        val photoBitmap: Bitmap)
 
 data class SingleShroomAnalysis(val shroomName: String, val probability: Float)

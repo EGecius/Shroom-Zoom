@@ -1,7 +1,6 @@
 package com.egecius.shroomzoom
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
@@ -38,8 +37,8 @@ class MainActivity : AppCompatActivity(), MainView {
         pictureTakerDelegate.onActivityResult(requestCode, resultCode, data)
     }
 
-    override fun showPhoto(bitmap: Bitmap) {
-        photoView.setImageBitmap(bitmap)
+    override fun showPhoto(shoomResult: ShroomAnalysisResult) {
+        photoView.setImageBitmap(shoomResult.photoBitmap)
     }
 
     override fun takePhoto() {
