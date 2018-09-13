@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity(), MainView {
         pictureTakerDelegate.onActivityResult(requestCode, resultCode, data)
     }
 
-    override fun showPhoto(shoomResult: ShroomAnalysisResult) {
-        photoView.setImageBitmap(shoomResult.photoBitmap)
+    override fun showPhoto(shroomResult: ShroomResult) {
+        photoView.setImageBitmap(shroomResult.photoBitmap)
     }
 
     override fun takePhoto() {

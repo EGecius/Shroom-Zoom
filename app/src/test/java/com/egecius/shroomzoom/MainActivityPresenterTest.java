@@ -30,7 +30,7 @@ public class MainActivityPresenterTest {
     ShroomAnalyser shroomAnalyser;
 
     List<SingleShroomAnalysis> analysisList = new ArrayList<>();
-    ShroomAnalysisResult mShroomAnalysisResult;
+    ShroomResult mShroomResult;
     PublishSubject<Bitmap> publishForPhotosTaken = PublishSubject.create();
 
     @Before
@@ -38,18 +38,18 @@ public class MainActivityPresenterTest {
         sut = new MainActivityPresenter();
         sut.init(mainView, publishForPhotosTaken, shroomAnalyser);
 
-        mShroomAnalysisResult = new ShroomAnalysisResult(analysisList,
+        mShroomResult = new ShroomResult(analysisList,
                 photoTakenBitmap);
 
         given(shroomAnalyser.analyse(photoTakenBitmap)).willReturn(
-                Single.just(mShroomAnalysisResult));
+                Single.just(mShroomResult));
     }
 
     @Test
     public void showsPhotoWhenViewTaken() {
         whenPhotoTaken();
 
-        verify(mainView).showPhoto(mShroomAnalysisResult);
+        verify(mainView).showPhoto(mShroomResult);
     }
 
 

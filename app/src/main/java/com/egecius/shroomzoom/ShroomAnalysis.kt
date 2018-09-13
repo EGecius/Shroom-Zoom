@@ -2,7 +2,7 @@ package com.egecius.shroomzoom
 
 import android.graphics.Bitmap
 
-data class ShroomAnalysisResult (
+data class ShroomResult (
         val list: List<SingleShroomAnalysis>,
         val photoBitmap: Bitmap)
 

@@ -31,6 +31,6 @@ class MainActivityPresenter : ViewModel() {
 }
 
 interface MainView {
-    fun showPhoto(shoomResult: ShroomAnalysisResult)
+    fun showPhoto(shroomResult: ShroomResult)
     fun takePhoto()
 }
