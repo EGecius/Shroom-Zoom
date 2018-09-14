@@ -7,14 +7,16 @@ import io.reactivex.Single
 class ShroomAnalyser {
 
     fun analyse(photoBitmap: Bitmap): Single<ShroomResult> {
-        // TODO: 11/09/2018 implement
-        val result = ShroomResult(listOf(
+        // TODO: 11/09/2018 implement properly
+        val result = createMockResult(photoBitmap)
+        return Single.just(result)
+    }
+
+    fun createMockResult(photoBitmap: Bitmap): ShroomResult {
+        return ShroomResult(listOf(
                 SingleShroomAnalysis("boletus", 0.90f),
                 SingleShroomAnalysis("Chanterelle", 0.02f),
                 SingleShroomAnalysis("Boletus badius", 0.70f)
         ), photoBitmap)
-
-
-        return Single.just(result)
     }
 }
