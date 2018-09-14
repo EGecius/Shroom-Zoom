@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity(), MainView {
 
     private lateinit var mPresenter: MainActivityPresenter
     private lateinit var pictureTakerDelegate: PhotoTakerDelegate
+    private var uiMapper = MainActivityUiMapper()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,18 +39,9 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun showResults(shroomResult: ShroomResult) {
-        photoView.setImageBitmap(shroomResult.photoBitmap)
-        val text = extractProbabilities(shroomResult)
-        probabilitiesView.text = text
-    }
-
-    private fun extractProbabilities(shroomResult: ShroomResult) : String {
-        val stringBuilder = StringBuilder()
-        for (item in shroomResult.list) {
-            stringBuilder.append(item.shroomName + ": " + item.probability + "\n")
-        }
-
-        return stringBuilder.toString()
+        val resultUi = uiMapper.toResultUi(shroomResult)
+        photoView.setImageBitmap(resultUi.photoBitmap)
+        probabilitiesView.text = resultUi.text
     }
 
     override fun takePhoto() {
