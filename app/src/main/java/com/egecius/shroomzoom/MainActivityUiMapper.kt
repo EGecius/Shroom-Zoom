@@ -3,8 +3,7 @@ package com.egecius.shroomzoom
 class MainActivityUiMapper {
 
     fun toResultUi(shroomResult: ShroomResult): ShroomResultUi {
-        val textConcatenated = concatenateText(shroomResult)
-        return ShroomResultUi(shroomResult.photoBitmap, textConcatenated)
+        return ShroomResultUi(shroomResult.photoBitmap, concatenateText(shroomResult))
     }
 
     private fun concatenateText(shroomResult: ShroomResult) : String {
