@@ -37,8 +37,19 @@ class MainActivity : AppCompatActivity(), MainView {
         pictureTakerDelegate.onActivityResult(requestCode, resultCode, data)
     }
 
-    override fun showPhoto(shroomResult: ShroomResult) {
+    override fun showResults(shroomResult: ShroomResult) {
         photoView.setImageBitmap(shroomResult.photoBitmap)
+        val text = extractProbabilities(shroomResult)
+        probabilitiesView.text = text
+    }
+
+    private fun extractProbabilities(shroomResult: ShroomResult) : String {
+        val stringBuilder = StringBuilder()
+        for (item in shroomResult.list) {
+            stringBuilder.append(item.shroomName + ": " + item.probability + "\n")
+        }
+
+        return stringBuilder.toString()
     }
 
     override fun takePhoto() {

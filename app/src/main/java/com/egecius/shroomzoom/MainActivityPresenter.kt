@@ -21,7 +21,7 @@ class MainActivityPresenter : ViewModel() {
     private fun listenToPhotosTaken() {
         photosObservable
                 .flatMapSingle { bitmap -> shroomAnalyser.analyse(bitmap) }
-                .subscribe { mainView.showPhoto(it) }
+                .subscribe { mainView.showResults(it) }
     }
 
     fun onClickedButtonTakePhoto() {
@@ -31,6 +31,6 @@ class MainActivityPresenter : ViewModel() {
 }
 
 interface MainView {
-    fun showPhoto(shroomResult: ShroomResult)
+    fun showResults(shroomResult: ShroomResult)
     fun takePhoto()
 }

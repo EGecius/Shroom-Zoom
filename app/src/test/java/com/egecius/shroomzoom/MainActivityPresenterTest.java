@@ -49,7 +49,7 @@ public class MainActivityPresenterTest {
     public void showsPhotoWhenViewTaken() {
         whenPhotoTaken();
 
-        verify(mainView).showPhoto(mShroomResult);
+        verify(mainView).showResults(mShroomResult);
     }
 
 

@@ -14,7 +14,7 @@ class ShroomAnalyser {
 
     fun createMockResult(photoBitmap: Bitmap): ShroomResult {
         return ShroomResult(listOf(
-                SingleShroomAnalysis("boletus", 0.90f),
+                SingleShroomAnalysis("Boletus", 0.90f),
                 SingleShroomAnalysis("Chanterelle", 0.02f),
                 SingleShroomAnalysis("Boletus badius", 0.70f)
         ), photoBitmap)
