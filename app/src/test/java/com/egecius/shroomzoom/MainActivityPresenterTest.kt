@@ -20,10 +20,6 @@ class MainActivityPresenterTest {
     private var photoTakenBitmap = mShroomResult.photoBitmap
     private var publishForPhotosTaken = PublishSubject.create<Bitmap>()
 
-    var analysisList: List<SingleShroomAnalysis> = ArrayList()
-    private lateinit var mShroomResult: ShroomResult
-    private var publishForPhotosTaken = PublishSubject.create<Bitmap>()
-
     @Mock
     lateinit var mainView: MainView
     @Mock
