@@ -10,21 +10,18 @@ import org.mockito.BDDMockito.given
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
-import java.util.*
 
 @RunWith(MockitoJUnitRunner::class)
 class MainActivityPresenterTest {
 
     private lateinit var sut: MainActivityPresenter
 
-    private var analysisList: List<SingleShroomAnalysis> = ArrayList()
-    private lateinit var mShroomResult: ShroomResult
+    private val mShroomResult = ShroomResultBuilder.aShroomResult().build()
+    private var photoTakenBitmap = mShroomResult.photoBitmap
     private var publishForPhotosTaken = PublishSubject.create<Bitmap>()
 
     @Mock
     lateinit var mainView: MainView
-    @Mock
-    lateinit var photoTakenBitmap: Bitmap
     @Mock
     lateinit var shroomAnalyser: ShroomAnalyser
 
@@ -32,8 +29,6 @@ class MainActivityPresenterTest {
     fun setUp() {
         sut = MainActivityPresenter()
         sut.init(mainView, publishForPhotosTaken, shroomAnalyser)
-
-        mShroomResult = ShroomResult(analysisList, photoTakenBitmap)
 
         given(shroomAnalyser.analyse(photoTakenBitmap)).willReturn(
                 Single.just(mShroomResult))
