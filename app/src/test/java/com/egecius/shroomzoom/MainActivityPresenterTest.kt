@@ -17,16 +17,16 @@ class MainActivityPresenterTest {
 
     lateinit var sut: MainActivityPresenter
 
+    var analysisList: List<SingleShroomAnalysis> = ArrayList()
+    private lateinit var mShroomResult: ShroomResult
+    private var publishForPhotosTaken = PublishSubject.create<Bitmap>()
+
     @Mock
     lateinit var mainView: MainView
     @Mock
     lateinit var photoTakenBitmap: Bitmap
     @Mock
     lateinit var shroomAnalyser: ShroomAnalyser
-
-    var analysisList: List<SingleShroomAnalysis> = ArrayList()
-    private lateinit var mShroomResult: ShroomResult
-    private var publishForPhotosTaken = PublishSubject.create<Bitmap>()
 
     @Before
     fun setUp() {
@@ -40,22 +40,21 @@ class MainActivityPresenterTest {
     }
 
     @Test
-    fun showsPhotoWhenViewTaken() {
+    fun `shows photo when view taken`() {
         whenPhotoTaken()
 
         verify<MainView>(mainView).showResults(mShroomResult)
     }
 
-
     @Test
-    fun shroomAnalyserIsCalledWhenPhotoTaken() {
+    fun `shroom analyser is called when photo taken`() {
         whenPhotoTaken()
 
         verify<ShroomAnalyser>(shroomAnalyser).analyse(photoTakenBitmap)
     }
 
     @Test
-    fun takesPhotoWhenRequested() {
+    fun `takes photo when requested`() {
         sut.onClickedButtonTakePhoto()
 
         verify<MainView>(mainView).takePhoto()
